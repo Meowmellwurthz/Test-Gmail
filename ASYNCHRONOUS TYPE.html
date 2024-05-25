@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bullying Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding-top: 40px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Bullying Form</h2>
+    </div>
+    <form id="bullying-form">
+      <div class="form-group">
+        <label>Recipient's Email:</label>
+        <input type="email" id="recipient-email" placeholder="Enter recipient's email">
+      </div>
+      <div class="form-group">
+        <label>Your Email:</label>
+        <input type="email" id="sender-email" placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label>Subject:</label>
+        <input type="text" id="email-subject" placeholder="Enter email subject">
+      </div>
+      <div class="form-group">
+        <label>Message Body:</label>
+        <textarea id="email-body" placeholder="Enter your message"></textarea>
+      </div>
+      <button type="button" class="submit-btn" id="send-email-btn">Send Email</button>
+    </form>
+  </div>
+
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    document.getElementById("send-email-btn").addEventListener("click", () => {
+      const recipientEmail = document.getElementById('recipient-email').value;
+      const senderEmail = document.getElementById('sender-email').value;
+      const emailSubject = document.getElementById('email-subject').value;
+      const emailBody = document.getElementById('email-body').value;
+
+      Email.send({
+        SecureToken: "75ba6998-f2a7-4da0-a7b2-4fe33361b643",
+        To: recipientEmail,
+        From: senderEmail,
+        Subject: emailSubject,
+        Body: emailBody
+      }).then(
+        message => {
+          console.log('Email sent successfully:', message);
+          alert('Email sent successfully');
+        },
+        error => {
+          console.error('Error sending email:', error);
+          alert('Error sending email');
+        }
+      );
+    });
+  </script>
+</body>
+</html>
